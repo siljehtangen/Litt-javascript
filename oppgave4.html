@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+             table, tr, td, th{
+            border: solid 1px black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Resultatliste</h1>
+    <h3>Skriv inn i input-feltene først</h3>
+
+    <label>
+        Skriv navnet ditt:
+        <input id="inpNavn" type="text">
+        Hva er hoppbakkens K-punkt i meter?
+        <input id="inpPunkt" type="number">
+    </label>
+
+    <div id="divRes"></div>
+
+
+    <div id="divNavn"></div>
+
+    <label>
+        Oppgi første stilpoeng:
+        <input id="inpStil1" value="18" type="number">
+    </label>
+    <label>
+        Oppgi andre stilpoeng:
+        <input id="inpStil2" value="18" type="number">
+    </label>
+    <label>
+        Oppgi tredje stilpoeng:
+        <input id="inpStil3" value="18" type="number">
+    </label>
+    <label>
+        Oppgi fjerde stilpoeng:
+        <input id="inpStil4" value="18" type="number">
+    </label>
+    <label>
+        Oppgi femte stilpoeng:
+        <input id="inpStil5" value="18" type="number">
+    </label>
+
+    <div id="divGyldig"></div>
+    <div id="divStilpoeng"></div>
+
+    <div id="divPoengsum"></div>
+  
+    <button id="btnNyDeltaker">Trykk for å få ut tabellen</button></div>
+    <div>
+    <table>
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>Lengdepoeng</th>
+                <th>Stilpoeng</th>
+                <th>Poengsum</th>
+            </tr>
+        </thead>
+        <tbody id="tbDeltakere"></tbody>
+    </table>
+</div>
+
+
+    <script>
+        const inpPunkt = document.querySelector('#inpPunkt');
+        const btnKnapp = document.querySelector('#btnKnapp');
+        const divRes = document.querySelector('#divRes');
+        const inpNavn = document.querySelector('#inpNavn');
+        const btnNavn = document.querySelector('#btnNavn');
+        const divNavn = document.querySelector('#divNavn');
+        const inpStil1 = document.querySelector('#inpStil1');
+        const inpStil2 = document.querySelector('#inpStil2');
+        const inpStil3 = document.querySelector('#inpStil3');
+        const inpStil4 = document.querySelector('#inpStil4');
+        const inpStil5 = document.querySelector('#inpStil5');
+        const divGyldig = document.querySelector('#divGyldig')
+        const btnPoengsum = document.querySelector('#btnPoengsum');
+        const divPoengsum = document.querySelector('#divPoengsum');
+        const btnNyDeltaker = document.querySelector('#btnNyDeltaker');
+        const tbDeltakere = document.querySelector('#tbDeltakere');
+
+        let deltakere = [];
+        
+        let poengsumer = [];
+         const beregnPoengsum = () =>{
+            let Kpunkt = Number(inpPunkt.value);
+            let navn = inpNavn.value;
+            let meterverdi = 0;
+            let tilfeldigTall = Math.floor(Math.random()* 1.1)+ 0.9;
+            let hopplengde = tilfeldigTall * Kpunkt;
+            let lengdepoeng = 60 + (hopplengde - Kpunkt) * meterverdi;
+            let stilkarakter1 = Number(inpStil1.value);
+            let stilkarakter2 = Number(inpStil2.value);
+            let stilkarakter3 = Number(inpStil3.value);
+            let stilkarakter4 = Number(inpStil4.value);
+            let stilkarakter5 = Number(inpStil5.value);
+            allePoengene.push(stilkarakter1);
+            allePoengene.push(stilkarakter2);
+            allePoengene.push(stilkarakter3);
+            allePoengene.push(stilkarakter4);
+            allePoengene.push(stilkarakter5);
+            allePoengene.sort((a,b) => {
+                return a - b;
+            });
+            let gjeldeneKarakter1 = (allePoengene[1]);
+            let gjeldeneKarakter2 =  (allePoengene[2]);
+            let gjeldeneKarakter3 = (allePoengene[3]);
+            let gjeldeneKarakterer = gjeldeneKarakter1 + gjeldeneKarakter2 + gjeldeneKarakter3;
+            let poengsum = lengdepoeng + gjeldeneKarakterer;
+            poengsumer.push(poengsum);
+            return poengsum;
+        }
+    
+
+        let navner = [];
+        const lagreNavn = () =>{
+            let navn = inpNavn.value;
+            navner.push(navn);
+            return navn;
+
+        }
+
+        let lengdepoenger = [];
+        const oppgiMeterverdi = () =>{
+            let Kpunkt = Number(inpPunkt.value);
+            let navn = inpNavn.value;
+            let meterverdi = 0;
+            if(70 <= Kpunkt && Kpunkt <= 79){
+                divRes.innerHTML += `<p> Meterverdien er 1.2 poeng`
+                meterverdi = 1.2;
+
+            }
+             else if(80 <= Kpunkt && Kpunkt <= 99){
+                divRes.innerHTML += `<p> Meterverdien er 2 poeng`;
+                    meterverdi = 2;
+            }
+            else if(100 <= Kpunkt && Kpunkt <= 169){
+                divRes.innerHTML += `<p> Meterverdien er 1.8 poeng`;
+                 meterverdi = 1.8;
+            }
+            else if(170 <= Kpunkt && Kpunkt <= 250){
+                divRes.innerHTML += `<p> Meterverdien er 1.2 poeng`;
+                 meterverdi = 1.2;
+            }
+            else{
+                divRes.innerHTML += `<p> Dette er ikke et gyldig K-punkt, prøv på nytt!`;
+            }
+            let tilfeldigTall = Math.floor(Math.random()* 1.1)+ 0.9;
+            let hopplengde = tilfeldigTall * Kpunkt;
+            let lengdepoeng = 60 + (hopplengde - Kpunkt) * meterverdi;
+            lengdepoenger.push(lengdepoeng);
+            return lengdepoeng;
+        }
+        
+        let poengene = new Set([
+            1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 
+            10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16, 16.5, 17, 17.5, 18,
+            18.5, 19, 19.5, 20]);
+        
+        let allePoengene = [];
+        let stilpoenger = [];
+        const beregnStilpoeng = () =>{
+            let stilkarakter1 = Number(inpStil1.value);
+            let stilkarakter2 = Number(inpStil2.value);
+            let stilkarakter3 = Number(inpStil3.value);
+            let stilkarakter4 = Number(inpStil4.value);
+            let stilkarakter5 = Number(inpStil5.value);
+            if(poengene.has(stilkarakter1) && poengene.has(stilkarakter2) && poengene.has(stilkarakter3)
+            && poengene.has(stilkarakter4) && poengene.has(stilkarakter5)){
+                divGyldig.innerHTML += `Du har oppgitt gyldige stilkarakterer`;
+            } else{
+                divGyldig.innerHTML += `Du har ikke oppgitt gyldige stilkarakterer`;
+            } 
+            allePoengene.push(stilkarakter1);
+            allePoengene.push(stilkarakter2);
+            allePoengene.push(stilkarakter3);
+            allePoengene.push(stilkarakter4);
+            allePoengene.push(stilkarakter5);
+            allePoengene.sort((a,b) => {
+                return a - b;
+            });
+            let gjeldeneKarakter1 = (allePoengene[1]);
+            let gjeldeneKarakter2 =  (allePoengene[2]);
+            let gjeldeneKarakter3 = (allePoengene[3]);
+            let gjeldeneKarakterer = gjeldeneKarakter1 + gjeldeneKarakter2 + gjeldeneKarakter3;
+    
+            stilpoenger.push(gjeldeneKarakterer);
+            return gjeldeneKarakterer;
+        }
+
+
+        const lagNyDeltaker = () => {
+            let sluttNavn = lagreNavn(); 
+            let sluttLengdepoeng = oppgiMeterverdi();
+            let sluttStilpoeng = beregnStilpoeng();
+            let sluttPoengsum = beregnPoengsum(); 
+            let nyDeltaker = {
+                navn: sluttNavn,
+                lengdepoeng: sluttLengdepoeng,
+                stilpoeng: sluttStilpoeng,
+                poengsum: sluttPoengsum
+            }
+
+            return nyDeltaker;
+        }
+
+        const skrivDeltakerTabell = () => {
+            tbDeltakere.innerHTML = ``; 
+
+            for(let deltaker of deltakere){
+                tbDeltakere.innerHTML += `
+                    <tr>
+                        <td>${deltaker.navn}</td>
+                        <td>${deltaker.lengdepoeng}</td>
+                        <td>${deltaker.stilpoeng}</td>
+                        <td>${deltaker.poengsum}</td>
+                    </tr>
+                `
+            }
+        }
+
+        const sorterDeltakere = () => {
+            deltakere.sort((a, b) => {
+                return b.poengsum - a.poengsum;
+            });
+        }
+        
+        btnNyDeltaker.onclick = () => { 
+            divStilpoeng.innerHTML = ``;
+            divRes.innerHTML = ``;
+            divNavn.innerHTML = ``;
+            divPoengsum.innerHTML = ``;
+            let nyDeltaker = lagNyDeltaker(); 
+            deltakere.push(nyDeltaker); 
+            sorterDeltakere(); 
+            skrivDeltakerTabell();
+        }
+
+    </script>
+</body>
+</html>

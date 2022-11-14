@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Beregne hoppets lengdepoeng</h1>
+
+    <label>
+        Skriv navnet ditt:
+        <input id="inpNavn" type="text">
+    </label>
+
+    <button id="btnNavn">Viser navnet</button>
+
+    <div id="divNavn"></div>
+
+
+
+    <script>
+        const inpNavn = document.querySelector('#inpNavn');
+        const btnNavn = document.querySelector('#btnNavn');
+        const divNavn = document.querySelector('#divNavn');
+
+
+        const lagreNavn = () =>{
+            let navn = inpNavn.value;
+            let Kpunkt = 200;
+            let meterverdi = 1.2;
+            let tilfeldigTall = Math.floor(Math.random()* 1.1)+ 0.9;
+            let hopplengde = tilfeldigTall * Kpunkt;
+            let lengdepoeng = 60 + (hopplengde - Kpunkt) * meterverdi;
+            divNavn.innerHTML += ` Hei ${navn}, din tilfeldige hopplengde er ${hopplengde} og lengdepoeng ble ${lengdepoeng} `;
+        }
+        btnNavn.onclick = lagreNavn;
+    </script>
+</body>
+</html>
